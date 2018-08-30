@@ -1,29 +1,9 @@
-
-
-const _keys = require('babel-runtime/core-js/object/keys');
-
-const _keys2 = _interopRequireDefault(_keys);
-
-const _typeof2 = require('babel-runtime/helpers/typeof');
-
-const _typeof3 = _interopRequireDefault(_typeof2);
-
-const _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
-
-const _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
-
-const _stringify = require('babel-runtime/core-js/json/stringify');
-
-const _stringify2 = _interopRequireDefault(_stringify);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 const isDevelopmentEnv = process.env.NODE_ENV !== 'production';
 
 const $avg = (function () {
   const cache = {};
   return function (target, record, currentValue, groupId) {
-    const cacheId = (0, _stringify2.default)(groupId);
+    const cacheId = JSON.stringify(groupId);
     if (typeof target !== 'string') {
       return currentValue;
     }
@@ -35,12 +15,8 @@ const $avg = (function () {
       cache[cacheId] = [1, value];
       return value;
     }
-
-    let _cache$cacheId = (0, _slicedToArray3.default)(cache[cacheId], 2),
-      n = _cache$cacheId[0],
-      avg = _cache$cacheId[1];
-
-    const newValue = (n * avg + value) / (n + 1);
+    const [n, avg] = cache[cacheId];
+    const newValue = ((n * avg) + value) / (n + 1);
     cache[cacheId] = [n + 1, newValue];
     return newValue;
   };
@@ -55,9 +31,7 @@ function $first(target, record, currentValue) {
   return value;
 }
 
-const $last = function $last(target, record) {
-  return record[target];
-};
+const $last = (target, record) => record[target];
 
 const $max = generateMinMax('max');
 
@@ -143,23 +117,19 @@ const operators = {
 };
 
 function resolveOperator(options) {
-  let operatorObj = options.operatorObj,
-    record = options.record,
-    currentValue = options.currentValue,
-    groupId = options.groupId;
-
-  if ((typeof operatorObj === 'undefined' ? 'undefined' : (0, _typeof3.default)(operatorObj)) !== 'object') {
+  const { operatorObj, record, currentValue, groupId } = options;
+  if (typeof operatorObj !== 'object') {
     if (isDevelopmentEnv) throw TypeError('Expected a value/key pair.');
     return null;
   }
-  const operatorObjKeys = (0, _keys2.default)(operatorObj);
+  const operatorObjKeys = Object.keys(operatorObj);
   if (operatorObjKeys.length > 1) {
     if (isDevelopmentEnv) throw SyntaxError('Only 1 operator per field is supported.');
     return null;
   }
   const operator = operatorObjKeys[0];
   const target = operatorObj[operator];
-  if ((0, _keys2.default)(operators).indexOf(operator) === -1) {
+  if (Object.keys(operators).indexOf(operator) === -1) {
     if (isDevelopmentEnv) throw SyntaxError('Invalid operator.');
     return null;
   }

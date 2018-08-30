@@ -2,11 +2,13 @@
   "name": "json-gator",
   "version": "0.0.1",
   "description": "json-gator is a javascript utility to perform aggregations on JSON-formatted data.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "test-dev": "jest --watch",
-    "build": "parcel build index.js -o json-gator.js"
+    "build": "babel src --ignore='**/*.test.js',fixtures --out-dir lib",
+    "lint-staged": "lint-staged",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -20,12 +22,35 @@
     "data"
   ],
   "license": "MIT",
-  "dependencies": {
+  "peerDependencies": {
     "deep-equal": "^1.0.1"
   },
+  "dependencies": {},
   "devDependencies": {
-    "jest": "^22.4.3",
-    "parcel": "^1.9.7"
+    "deep-equal": "^1.0.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.24.1",
+    "babel-eslint": "^8.2.5",
+    "babel-jest": "^22.4.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "dotenv": "^5.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jest": "^21.17.0",
+    "eslint-plugin-jsx-a11y": "^6.1.0",
+    "eslint-plugin-react": "^7.10.0",
+    "jest": "^23.4.2",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "jest": {
     "testURL": "http://localhost"

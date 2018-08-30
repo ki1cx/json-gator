@@ -1,0 +1,33 @@
+{
+  "extends": [
+    "airbnb",
+    "plugin:jest/recommended"
+  ],
+  "env": {
+    "browser": true,
+    "jest/globals": true
+  },
+  "plugins": ["jest"],
+  "parser": "babel-eslint",
+  "rules": {
+    "jest/no-identical-title": "error",
+    "jest/no-disabled-tests": "warn",
+    "jest/valid-expect": "error",
+    "object-curly-newline": ["error", {"multiline": true}],
+    "lines-around-comment": [
+      "error",
+      {
+        "beforeBlockComment": true,
+        "afterBlockComment": false,
+        "beforeLineComment": true,
+        "afterLineComment": false,
+        "allowBlockStart": true,
+        "allowBlockEnd": true,
+        "allowObjectStart": true,
+        "allowObjectEnd": true,
+        "allowArrayStart": true,
+        "allowArrayEnd": true
+      }
+    ]
+  }
+}
