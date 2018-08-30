@@ -1,18 +1,18 @@
 {
-  "name": "json-aggregate",
-  "version": "0.0.4",
-  "description": "json-aggregate is a javascript utility to perform aggregations on JSON-formatted data.",
+  "name": "json-gator",
+  "version": "0.0.1",
+  "description": "json-gator is a javascript utility to perform aggregations on JSON-formatted data.",
   "main": "index.js",
   "scripts": {
     "test": "jest",
     "test-dev": "jest --watch",
-    "build": "parcel build index.js -o json-aggregate.js"
+    "build": "parcel build index.js -o json-gator.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/salvadr/json-aggregate.git"
+    "url": "git+https://github.com/ki1cx/json-gator"
   },
-  "author": "Salvador Navarrete Garcia",
+  "author": "Ki Chang",
   "keywords": [
     "aggregate",
     "aggregation",
