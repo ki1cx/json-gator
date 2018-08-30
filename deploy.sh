@@ -50,6 +50,12 @@ lintStaged() {
   docker-compose -f $docker_compose_file run --rm node bash -c "npm run lint-staged"
 }
 
+publish() {
+  npm login
+  npm version prerelease
+  npm publish
+}
+
 case "$method" in
   build)
     build
@@ -62,6 +68,9 @@ case "$method" in
     ;;
   install)
     install
+    ;;
+  publish)
+    publish)
     ;;
   *)
     echo $"Usage: $0 {test-watch|build}"
