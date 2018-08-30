@@ -1,8 +1,6 @@
 const isDevelopmentEnv = process.env.NODE_ENV !== 'production';
 
-const round = (number, places) => {
-  return +(Math.round(number + "e+" + places)  + "e-" + places);
-};
+const round = (number, places) => +(`${Math.round(`${number}e+${places}`)}e-${places}`);
 
 const $avg = (function () {
   const cache = {};
