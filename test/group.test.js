@@ -1,4 +1,4 @@
-const jsonAggregate = require('../index')
+const jsonAggregate = require('../src/index')
 const { products } = require('./data')
 
 describe('group', () => {
@@ -66,12 +66,21 @@ describe('group', () => {
       collection
       .group({
         id: 'company',
-        count: { $avg: 'employeeCount' }
+        employeeCount: { $avg: 'employeeCount' },
+        price: { $avg: 'price' }
       })
       .exec()
     ).toEqual([
-        { id: 'a', count: 45 },
-        { id: 'b', count: 30 }
+      {
+        "employeeCount": 45,
+        "id": "a",
+        "price": 100.125
+      },
+      {
+        "employeeCount": 30,
+        "id": "b",
+        "price": 82.805
+      }
     ])
   })
 
@@ -231,19 +240,36 @@ describe('group', () => {
         avg: { $avg: 'price' }
       })
       .exec()
-    ).toEqual([{
-      id: { company: 'a', category: 1 },
-      avg: 100
-    }, {
-      id: { company: 'a', category: 2 },
-      avg: 100.25
-    }, {
-      id: { company: 'b', category: 1 },
-      avg: 70.495
-    }, {
-      id: { company: 'b', category: 2 },
-      avg: 95.115
-    }])
+    ).toEqual([
+      {
+        "avg": 100,
+        "id": {
+          "category": 1,
+          "company": "a"
+        }
+      },
+      {
+        "avg": 100.125,
+        "id": {
+          "category": 2,
+          "company": "a"
+        }
+      },
+      {
+        "avg": 90.2483333333,
+        "id": {
+          "category": 1,
+          "company": "b"
+        }
+      },
+      {
+        "avg": 91.465,
+        "id": {
+          "category": 2,
+          "company": "b"
+        }
+      }
+    ])
   })
 
   test('group with multiple keys ($max)', () => {

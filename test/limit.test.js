@@ -1,4 +1,4 @@
-const jsonAggregate = require('../index')
+const jsonAggregate = require('../src/index')
 const { products } = require('./data')
 
 describe('limit', () => {

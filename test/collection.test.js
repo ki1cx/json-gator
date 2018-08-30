@@ -1,5 +1,5 @@
-const jsonAggregate = require('../index')
-const Collection = require('../lib/Collection')
+const jsonAggregate = require('../src/index')
+const Collection = require('../src/Collection')
 
 describe('initialization', () => {
   const json = JSON.stringify({ 'a': 1 })

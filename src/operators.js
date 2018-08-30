@@ -1,9 +1,13 @@
 const isDevelopmentEnv = process.env.NODE_ENV !== 'production';
 
+const round = (number, places) => {
+  return +(Math.round(number + "e+" + places)  + "e-" + places);
+};
+
 const $avg = (function () {
   const cache = {};
   return function (target, record, currentValue, groupId) {
-    const cacheId = JSON.stringify(groupId);
+    const cacheId = JSON.stringify(`${groupId}-${target}`);
     if (typeof target !== 'string') {
       return currentValue;
     }
@@ -16,7 +20,7 @@ const $avg = (function () {
       return value;
     }
     const [n, avg] = cache[cacheId];
-    const newValue = ((n * avg) + value) / (n + 1);
+    const newValue = round(((n * avg) + value) / (n + 1), 10);
     cache[cacheId] = [n + 1, newValue];
     return newValue;
   };

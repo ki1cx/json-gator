@@ -70,7 +70,7 @@ case "$method" in
     install
     ;;
   publish)
-    publish)
+    publish
     ;;
   *)
     echo $"Usage: $0 {test-watch|build}"
