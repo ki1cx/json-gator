@@ -1,0 +1,8 @@
+version: '3'
+services:
+  node:
+    image: node:${DOCKER_NODE_VERSION}
+    volumes:
+      - $PWD:/var/lib/json-aggregate:rw
+      - /tmp:/tmp
+    working_dir: /var/lib/json-aggregate

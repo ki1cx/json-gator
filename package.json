@@ -1,0 +1,33 @@
+{
+  "name": "json-aggregate",
+  "version": "0.0.4",
+  "description": "json-aggregate is a javascript utility to perform aggregations on JSON-formatted data.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-dev": "jest --watch",
+    "build": "parcel build index.js -o json-aggregate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salvadr/json-aggregate.git"
+  },
+  "author": "Salvador Navarrete Garcia",
+  "keywords": [
+    "aggregate",
+    "aggregation",
+    "json",
+    "data"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "deep-equal": "^1.0.1"
+  },
+  "devDependencies": {
+    "jest": "^22.4.3",
+    "parcel": "^1.9.7"
+  },
+  "jest": {
+    "testURL": "http://localhost"
+  }
+}
