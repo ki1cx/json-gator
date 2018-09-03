@@ -2,6 +2,13 @@
 
 This is a fork of https://github.com/salvadr/json-aggregate
 
+## Fixes various issues
+
+- Sum operator: support for floats
+- Avg operator: support multiple fields
+- GroupId: support number based group id
+
+
 ### Documentation
 Please check all the methods available as well as live examples in the [documentation](http://salvador.io/json-aggregate).
 ### License
