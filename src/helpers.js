@@ -1,19 +1,23 @@
 const deepEqual = require('deep-equal');
 
 function getGroupId(id, obj) {
+  let groupId;
+
   if (typeof id === 'string') {
     const candidateId = obj[id];
     if (!(typeof candidateId === 'string'
         || typeof candidateId === 'number')) {
       throw TypeError('Only types "string" and "number" are supported for group ids.');
     }
-    return candidateId;
-  } if (Array.isArray(id)) {
-    return id.reduce((aggregated, key) => {
+    groupId = candidateId;
+  } else if (Array.isArray(id)) {
+    groupId = id.reduce((aggregated, key) => {
       aggregated[key] = obj[key];
       return aggregated;
     }, {});
   }
+
+  return groupId;
 }
 
 function getGroup(groupId, aggregated) {
@@ -27,7 +31,7 @@ function getGroup(groupId, aggregated) {
       }
       return true;
     });
-  } else if (typeof groupId === 'string') {
+  } else if (typeof groupId === 'string' || typeof groupId === 'number') {
     idx = aggregated.findIndex(item => item.id === groupId);
   }
   const groupObj = idx === -1 ? { id: groupId } : aggregated.splice(idx, 1)[0];
@@ -35,7 +39,7 @@ function getGroup(groupId, aggregated) {
 }
 
 function getGroupKeys(groupId, aggregated) {
-  if (typeof groupId === 'string') {
+  if (typeof groupId === 'string' || typeof groupId === 'number') {
     if (aggregated.indexOf(groupId) === -1) {
       aggregated.push(groupId);
     }

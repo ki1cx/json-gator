@@ -19,6 +19,14 @@ describe('group', () => {
     ).toEqual(['a', 'b']);
   });
 
+  test('group with id(number)', () => {
+    expect(
+      collection
+        .group({ id: 'category' })
+        .exec(),
+    ).toEqual([1, 2]);
+  });
+
   test('group with $sum (number)', () => {
     expect(
       collection
