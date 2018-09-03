@@ -51,6 +51,7 @@ lintStaged() {
 }
 
 publish() {
+  build
   npm login
   npm version prerelease
   npm publish
