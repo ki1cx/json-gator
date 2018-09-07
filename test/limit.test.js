@@ -1,5 +1,6 @@
+import products from './data';
+
 const jsonAggregate = require('../src/index');
-const { products } = require('./data');
 
 describe('limit', () => {
   test('limit', () => {

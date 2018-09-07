@@ -1,8 +1,11 @@
+import products from './data';
+import products2 from './data2';
+
 const jsonAggregate = require('../src/index');
-const { products } = require('./data');
 
 describe('group', () => {
   const collection = jsonAggregate.create(JSON.stringify(products));
+
   test('simple group', () => {
     expect(
       collection
@@ -88,6 +91,53 @@ describe('group', () => {
         employeeCount: 30,
         id: 'b',
         price: 82.805,
+      },
+    ]);
+  });
+
+  test('group with $avg (property) consecutive execution with different data', () => {
+    const collection1 = jsonAggregate.create(products);
+    const collection2 = jsonAggregate.create(products2);
+
+    expect(
+      collection1
+        .group({
+          id: 'company',
+          employeeCount: { $avg: 'employeeCount' },
+          price: { $avg: 'price' },
+        })
+        .exec(),
+    ).toEqual([
+      {
+        employeeCount: 45,
+        id: 'a',
+        price: 100.125,
+      },
+      {
+        employeeCount: 30,
+        id: 'b',
+        price: 82.805,
+      },
+    ]);
+
+    expect(
+      collection2
+        .group({
+          id: 'company',
+          employeeCount: { $avg: 'employeeCount' },
+          price: { $avg: 'price' },
+        })
+        .exec(),
+    ).toEqual([
+      {
+        employeeCount: 890,
+        id: 'a',
+        price: 700,
+      },
+      {
+        employeeCount: 890,
+        id: 'b',
+        price: 600,
       },
     ]);
   });

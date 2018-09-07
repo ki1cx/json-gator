@@ -46,6 +46,8 @@ class Collection {
   group(options) {
     // check and extract group id
     let id;
+    const cache = {};
+
     if (typeof options === 'string' || Array.isArray(options)) {
       id = options;
     } else if (Object.keys(options).indexOf('id') !== -1) {
@@ -87,6 +89,7 @@ class Collection {
             currentValue: groupObj[field],
             groupId,
             record,
+            cache,
           });
         }
         aggregated.push(groupObj);

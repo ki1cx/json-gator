@@ -3,8 +3,7 @@ const isDevelopmentEnv = process.env.NODE_ENV !== 'production';
 const round = (number, places) => +(`${Math.round(`${number}e+${places}`)}e-${places}`);
 
 const $avg = (function () {
-  const cache = {};
-  return function (target, record, currentValue, groupId) {
+  return function (target, record, currentValue, groupId, cache) {
     const cacheId = JSON.stringify(`${groupId}-${target}`);
     if (typeof target !== 'string') {
       return currentValue;
@@ -119,7 +118,7 @@ const operators = {
 };
 
 function resolveOperator(options) {
-  const { operatorObj, record, currentValue, groupId } = options;
+  const { operatorObj, record, currentValue, groupId, cache } = options;
   if (typeof operatorObj !== 'object') {
     if (isDevelopmentEnv) throw TypeError('Expected a value/key pair.');
     return null;
@@ -136,7 +135,7 @@ function resolveOperator(options) {
     return null;
   }
 
-  return operators[operator](target, record, currentValue, groupId);
+  return operators[operator](target, record, currentValue, groupId, cache);
 }
 
 module.exports = resolveOperator;

@@ -1,5 +1,6 @@
+import products from './data';
+
 const jsonAggregate = require('../src/index');
-const { products } = require('./data');
 
 describe('match', () => {
   const collection = jsonAggregate.create(JSON.stringify(products));
