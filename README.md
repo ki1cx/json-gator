@@ -7,7 +7,7 @@ This is a fork of https://github.com/salvadr/json-aggregate
 - Sum operator: support for floats
 - Avg operator: support multiple fields
 - GroupId: support number based group id
-- $avg operator cache shouldn't persist across runs
+- Avg operator: cache shouldn't persist across runs
 
 
 ### Documentation
